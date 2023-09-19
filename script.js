@@ -128,3 +128,28 @@ scrollBottom.forEach((el)=>observer.observe(el));
 
 const scrollTop = document.querySelectorAll(".scroll-Top");
 scrollTop.forEach((el)=>observer.observe(el));
+
+
+// Elements to apply the parallax effect (including the video section)
+const parallaxElements = document.querySelectorAll(".parallax-element");
+
+// Function to apply parallax effect
+const applyParallaxEffect = (entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-items");
+    } else {
+      entry.target.classList.remove("show-items");
+    }
+  });
+};
+
+// Create a new Intersection Observer for the parallax effect
+const parallaxObserver = new IntersectionObserver(applyParallaxEffect, {
+  threshold: 0.5, // Adjust this threshold as needed
+});
+
+// Observe the parallax elements
+parallaxElements.forEach((element) => {
+  parallaxObserver.observe(element);
+});
